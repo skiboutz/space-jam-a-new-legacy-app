@@ -1,0 +1,16 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Space Jam locally",
+            "request": "launch",
+            "type": "pwa-msedge",
+            "url": "file:///C:/git/space-jam-a-new-legacy-app/index.html",
+            "webRoot": "${workspaceFolder}"
+        },
+
+    ]
+}

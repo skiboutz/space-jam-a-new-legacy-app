@@ -4,7 +4,9 @@ var playerMap = new Map();
 
 // Variables to keep track of constants
 const maxPlayersOnCourt = 5;
-const numQuarters = 4
+const numQuarters = 4;
+const nameIndex = 1;
+const perIndex = 9;
 
 
 // Variables to track state throughout the game
@@ -89,52 +91,49 @@ function displayPlayerBench() {
     displayPlayerCards();
 }
 
-// This function is called at the beginning of the game play to initialize
-// PER for each player, and at each quarter to do two things: 
-// 1. Ensure the players currently on the court have the correct PER represented
-// 2. Update the stats for each player for the current quarter
 function displayPlayerCards() {
     // Get the div in which the stats will be shown.
-
+    var playerCardDisplay = document.getElementById('playerCards');
 
     // For each player, create a player stat card to show the PER for that player for a 
     // specific quarter.
+    for (let [playerName, playerStats] of playerMap.entries()) {
+        // Create an overall div that will contain the player stat information.
+        var playerCard = document.createElement('div');
 
-    // Create an overall div that will contain the player stat information.
+        // Set an ID for the card so we can get it later
+        playerCard.id = playerName + '_card';
 
+        // Set the style class name
+        playerCard.className = 'playerCard';
 
-    // Set an ID for the card so we can get it later
+        // Add the player image to the div.
+        var playerImage = document.createElement('img');
 
+        // Set the style for the image
+        playerImage.className = 'perCard';
 
-    // Set the style class name
+        // Load the image
+        playerImage.src = 'images/'+playerName+'.png';
 
+        // Add the image to the card
+        playerCard.appendChild(playerImage);
 
-    // Add the player image to the div.
+        // Add the player's PER to the div.
+        var newPlayerPER = document.createElement('p');
 
+        // Set the style for the number
+        newPlayerPER.className = 'perCard';
 
-    // Set the style for the image
+        // Set the text for the PER
+        newPlayerPER.innerText = 'PER: ' + playerStats[currentQuarter].toPrecision(4);
 
+        // Add the PER
+        playerCard.appendChild(newPlayerPER);
 
-    // Load the image
-
-
-    // Add the image to the card
-
-
-    // Add the player's PER to the div.
-
-
-    // Set the style for the number
-
-
-    // Set the text for the PER
-
-
-    // Add the PER
-
-
-    // Add the player stat card to the game.
-
+        // Add the player stat card to the game.
+        playerCardDisplay.appendChild(playerCard);
+    }
 }
 
 // This function is called each time a player button is clicked. A player
