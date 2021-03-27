@@ -18,40 +18,39 @@ var quarterPER = 0;
 var quarterAvePER = 0;
 var totalAvePER = 0;
 
-// Function to read in all of the player stats
+// Function to read in all player stats.
 function processPlayers(allPlayerStats) {
-     
-
-    
+    // Split the data by newline into an array.
+    var allPlayerStatLines = allPlayerStats.split(/\r\n|\n/);
 
     // Remove the header line (first line)
     allPlayerStatLines.shift();
 
+    // Loop through the 15 players and create a map entry of player name to player PER
+    for (var statLine of allPlayerStatLines) {
+        // Get all individual stat values
+        var stats = statLine.split(',');
+        // If it's just an empty line, skip it
+        if (!stats || stats.length <= 1) continue; // empty line
 
-    // Get all individual stat values
-    var stats = statLine.split(',');
-    // If it's just an empty line, skip it
-    if (!stats || stats.length <= 1) continue; // empty line
+        // The second column has the player name
+        var playerName = stats[nameIndex];
 
-    // The second column has the player name
-    var playerName = stats[1];
+        // check if player exists in map
+        if (!playerMap.has(playerName)) {
+            // First time we see the player; Add them in!
+            playerMap.set(playerName, []);
+        }
 
-    // Check if player exists in map
-    if (!playerMap.has(playerName)) {
-        // First time we see the player; Add them in!
-        playerMap.set(playerName, []);
+        // Get per value for player
+        var per = parseFloat(stats[perIndex]);
+
+        // Add per value to player's array (the next quarter)
+        playerMap.get(playerName).push(per);
     }
-
-    // Get per value for player
-    var per = parseFloat(stats[9]);
-
-    // Add per value to player's array (the next quarter)
-    playerMap.get(playerName).push(per);
-
 
     // Add the players to the bench.
     displayPlayerBench();
-
 }
 
 // Function to add the players to the bench to start the game
@@ -77,7 +76,7 @@ function displayPlayerBench() {
         var playerImage = document.createElement('img');
 
         // Set the source (or location) of the image
-        playerImage.src = 'images/'+playerName+'.png';
+        playerImage.src = 'images/' + playerName + '.png';
 
         // Add the image to the button
         newPlayer.appendChild(playerImage);
@@ -103,40 +102,40 @@ function displayPlayerCards() {
     // For each player, create a player stat card to show the PER for that player for a 
     // specific quarter.
 
-        // Create an overall div that will contain the player stat information.
+    // Create an overall div that will contain the player stat information.
 
 
-        // Set an ID for the card so we can get it later
+    // Set an ID for the card so we can get it later
 
 
-        // Set the style class name
+    // Set the style class name
 
 
-        // Add the player image to the div.
+    // Add the player image to the div.
 
 
-        // Set the style for the image
+    // Set the style for the image
 
 
-        // Load the image
+    // Load the image
 
 
-        // Add the image to the card
+    // Add the image to the card
 
 
-        // Add the player's PER to the div.
+    // Add the player's PER to the div.
 
 
-        // Set the style for the number
+    // Set the style for the number
 
 
-        // Set the text for the PER
+    // Set the text for the PER
 
 
-        // Add the PER
+    // Add the PER
 
 
-        // Add the player stat card to the game.
+    // Add the player stat card to the game.
 
 }
 
@@ -154,43 +153,43 @@ function movePlayer() {
 
     // Check whether the player is currently on the bench.
 
-        // If there are already five players on the court, don't let the player
-        // move to the court; alert the coach that there are enough players.
+    // If there are already five players on the court, don't let the player
+    // move to the court; alert the coach that there are enough players.
 
 
 
 
-            // If there is room on the court, update the number of players on
-            // the court, and update the average PER for the quarter based on
-            // this player moving to the court.
-
-
-
-
-
-
-            // Move the player to the court
-
-
-
-        // If the player is being taken off the court for a water break, decrement
-        // the number of players on the bench and remove the player's PER from the
-        // average.
+    // If there is room on the court, update the number of players on
+    // the court, and update the average PER for the quarter based on
+    // this player moving to the court.
 
 
 
 
 
 
-            // If there are no more players on the court, set the values to 0.
+    // Move the player to the court
+
+
+
+    // If the player is being taken off the court for a water break, decrement
+    // the number of players on the bench and remove the player's PER from the
+    // average.
 
 
 
 
-        // Update the PER average. This might result in a zero value if your team is particularly tired.
 
 
-        // Move the player to the bench.
+    // If there are no more players on the court, set the values to 0.
+
+
+
+
+    // Update the PER average. This might result in a zero value if your team is particularly tired.
+
+
+    // Move the player to the bench.
 
 
 }
@@ -214,13 +213,13 @@ function updateCardsInGame() {
 
     // Loop through each of the players currently on the court.
 
-        // Get the name of the player
+    // Get the name of the player
 
 
-        // Get the PER for the player
+    // Get the PER for the player
 
 
-        // Add the PER to the quarter PER total
+    // Add the PER to the quarter PER total
 
 
 
@@ -298,7 +297,7 @@ function startNextQuarter() {
 
 
     // Update the button to indicate a quarter is in progress.
-    
+
 
     // Define the interval period for the quarter; in this case, it's 12 seconds.
     var playerMap = new Map();
@@ -310,14 +309,14 @@ function startNextQuarter() {
 
     // Update the count down every 1 second, as indicated by the `1000` as
     // the second parameter to the setInterval function
-       
-        // Display the current time on the court board.
+
+    // Display the current time on the court board.
 
 
-        // Decrement the interval counter for this quarter.
+    // Decrement the interval counter for this quarter.
 
 
-        // If the quarter has ended, reset the interval timer and get ready for the next quarter.
+    // If the quarter has ended, reset the interval timer and get ready for the next quarter.
 
 
 
